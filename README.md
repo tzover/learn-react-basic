@@ -21,3 +21,11 @@ docker-compose exec frontend bash
 ```
 yarn dev
 ```
+
+## Create environment
+
+```
+docker-compose exec frontend bash
+cd ..
+npx create-react-app app --template typescript
+```
