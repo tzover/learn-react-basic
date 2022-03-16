@@ -8,12 +8,12 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend/app:/home/node/app
-      - frontend-volume:/home/node/app/node_modules
+      # - frontend-volume:/home/node/app/node_modules
     ports:
       - ${FRONTEND_PORT}:3000
     tty: true
     restart: always
-volumes:
-  frontend-volume:
-    name: ${CONTAINER_BASENAME}-volume
-    driver: local
+# volumes:
+#   frontend-volume:
+#     name: ${CONTAINER_BASENAME}-volume
+#     driver: local
