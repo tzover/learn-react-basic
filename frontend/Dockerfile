@@ -13,7 +13,7 @@ WORKDIR ${wkdir}
 
 COPY ./app/ /home/${USER_NAME}/app/
 
-# RUN yarn install
+RUN yarn install
 
 # RUN yarn build
 

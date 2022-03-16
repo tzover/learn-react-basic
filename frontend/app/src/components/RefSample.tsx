@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import CheckRendering from './CheckRendering'
 import CheckRenderingMemo from './CheckRenderingMemo'
 
 const RefSample = () => {
-  const [text, setText] = useState('')
   const refText = useRef<HTMLInputElement | null>(null)
 
   return (

@@ -1,5 +1,4 @@
-import React from 'react'
-import logo from '../logo.svg'
+import React, { useCallback } from 'react'
 import '../App.css'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
@@ -9,6 +8,9 @@ import Layout from './Layout'
 import StateSample from './StateSample'
 import RefSample from './RefSample'
 import EffectSample from './EffectSample'
+import { useRecoilValue } from 'recoil'
+import { NumState } from '../contexts/AppAtom'
+import axios, { Axios, AxiosError } from 'axios'
 
 // function App() {
 const Home = () => {
@@ -16,6 +18,17 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const params = useParams()
+
+  // GlobalState recoil
+  const num = useRecoilValue(NumState)
+
+  // GET Data
+  const getData = useCallback((url: string) => {
+    axios
+      .get(url)
+      .then((res) => console.log(res.data))
+      .catch((e: AxiosError) => console.log('Error', e.message))
+  }, [])
 
   return (
     <Layout>
@@ -34,7 +47,7 @@ const Home = () => {
       </div>
 
       {/* Practice */}
-      <div className='bg-blue-100 my-5 px-3'>
+      <div className='bg-blue-100 my-5 px-3 pb-3'>
         <div className='my-3'>
           <h2 className='text-xl underline'>Practice zone</h2>
         </div>
@@ -141,6 +154,34 @@ const Home = () => {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+        <div className='px-3 my-2'>
+          <p>GlobalState</p>
+          <div className='px-10'>
+            <button
+              type='button'
+              className='p-3 border-2 border-red-300 hover:bg-pink-500'
+              onClick={() => console.log('Recoil value is ', num)}
+            >
+              Check global state number
+            </button>
+          </div>
+        </div>
+        <div className='px-3 my-2'>
+          <p>axios</p>
+          <div className='px-10'>
+            <button
+              type='button'
+              className='p-3 border-2 border-red-300 hover:bg-red-500'
+              // onClick={() => getData('')}
+              // onClick={() => getData('http://localhost:3000')}
+              onClick={() =>
+                getData('https://jsonplaceholder.typicode.com/todos')
+              }
+            >
+              GET DATA
+            </button>
           </div>
         </div>
       </div>

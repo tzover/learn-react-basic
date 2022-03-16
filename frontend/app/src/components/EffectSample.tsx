@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { NumState } from '../contexts/AppAtom'
 
 const EffectSample = () => {
-  const [num, setNum] = useState(0)
+  const [num, setNum] = useRecoilState(NumState)
 
-  const addNum = (prevNum: number) => {
-    console.log('function')
-    setNum(prevNum + 1)
-  }
-
-  // const addNum = useCallback((prevNum: number) => {
+  // const addNum = (prevNum: number) => {
   //   console.log('function')
   //   setNum(prevNum + 1)
-  // }, [])
+  // }
+
+  const addNum = useCallback((prevNum: number) => {
+    console.log('function')
+    setNum(prevNum + 1)
+  }, [])
 
   useEffect(() => {
     console.log(num, '% 5 = ', num % 5)
